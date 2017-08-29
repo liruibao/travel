@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Travel</string>
+    <string name="info_for_exception">抱歉</string>
 </resources>

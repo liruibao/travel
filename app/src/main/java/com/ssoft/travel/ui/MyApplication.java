@@ -3,6 +3,7 @@ package com.ssoft.travel.ui;
 import android.app.Application;
 
 import com.ssoft.travel.BuildConfig;
+import com.ssoft.travel.utils.CrashHandler;
 import com.ssoft.travel.utils.LogHelper;
 
 /**
@@ -19,5 +20,9 @@ public class MyApplication extends Application {
         } else {
             LogHelper.init(false);
         }
+
+        //全局处理异常
+        CrashHandler crashHandler = CrashHandler.getInstance();
+        crashHandler.init(getApplicationContext());
     }
 }
