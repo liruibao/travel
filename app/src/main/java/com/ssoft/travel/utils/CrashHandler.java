@@ -97,20 +97,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (ex == null) {
             return false;
         }
-        //使用Toast来显示异常信息
-//        new Thread() {
-//            @Override
-//            public void run() {
-//                Looper.prepare();
-//                Toast.makeText(mContext, "很抱歉,程序出现异常,即将退出.", Toast.LENGTH_LONG).show();
-//                Looper.loop();
-//            }
-//        }.start();
         Intent intent = new Intent(mContext, ExceptionPage.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
         //收集设备参数信息
-        collectDeviceInfo(mContext);
+//        collectDeviceInfo(mContext);
         //保存日志文件
 //        saveCrashInfo2File(ex);
         return true;

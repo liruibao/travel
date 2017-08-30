@@ -11,6 +11,7 @@ import com.ssoft.travel.fragment.DrinkFragment;
 import com.ssoft.travel.fragment.FoodFragment;
 import com.ssoft.travel.fragment.MineFragment;
 import com.ssoft.travel.fragment.TravelFragment;
+import com.ssoft.travel.service.daemon.DaemonWrapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,9 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+
+        // 保活
+        DaemonWrapper.bindActivity(this,0);
 
     }
 
