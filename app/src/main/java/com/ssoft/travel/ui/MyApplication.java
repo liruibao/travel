@@ -2,6 +2,8 @@ package com.ssoft.travel.ui;
 
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 import com.ssoft.travel.BuildConfig;
 import com.ssoft.travel.utils.CrashHandler;
 import com.ssoft.travel.utils.LogHelper;
@@ -11,6 +13,10 @@ import com.ssoft.travel.utils.LogHelper;
  */
 
 public class MyApplication extends Application {
+
+
+    public static RefWatcher refWatcher = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,5 +30,18 @@ public class MyApplication extends Application {
         //全局处理异常
         CrashHandler crashHandler = CrashHandler.getInstance();
         crashHandler.init(getApplicationContext());
+        // 内存泄漏检测
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            // This process is dedicated to LeakCanary for heap analysis.
+            // You should not init your app in this process.
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
+        // Normal app init code...
     }
+
+    public static RefWatcher getRefWatcher() {
+        return refWatcher;
+    }
+
 }

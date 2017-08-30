@@ -3,9 +3,11 @@ package com.ssoft.travel.ui;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.widget.Toast;
 
 import com.ssoft.travel.R;
 import com.ssoft.travel.adapter.MainPageAdapter;
+import com.ssoft.travel.event.EventHelper;
 import com.ssoft.travel.fragment.BaseFragment;
 import com.ssoft.travel.fragment.DrinkFragment;
 import com.ssoft.travel.fragment.FoodFragment;
@@ -13,8 +15,13 @@ import com.ssoft.travel.fragment.MineFragment;
 import com.ssoft.travel.fragment.TravelFragment;
 import com.ssoft.travel.service.daemon.DaemonWrapper;
 
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * Created by silentlrb on 2017/8/2.
@@ -38,6 +45,12 @@ public class MainActivity extends BaseActivity {
 
         // 保活
         DaemonWrapper.bindActivity(this,0);
+        EventHelper.register(this);
+        EventHelper.post(new EventHelper.Test2Event());
+
+        MyApplication.getRefWatcher().watch(this);
+
+
 
     }
 
@@ -69,4 +82,16 @@ public class MainActivity extends BaseActivity {
         mFragments.add(new TravelFragment());
         mFragments.add(new MineFragment());
     }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventHelper.TestEvent event) {
+        Toasty.success(this, "Success!", Toast.LENGTH_SHORT, true).show();
+        /* Do something */
+    };
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(EventHelper.Test2Event event) {
+        Toasty.info(this, "Here is some info for you.", Toast.LENGTH_SHORT, true).show();
+        /* Do something */
+    };
 }

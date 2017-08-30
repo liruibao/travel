@@ -3,7 +3,8 @@ package com.ssoft.travel.service.daemon;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
+
+import com.ssoft.travel.utils.LogHelper;
 
 /**
  * 普通的后台Service进程
@@ -16,7 +17,7 @@ public class BackgroundService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "onCreate");
+        LogHelper.i(TAG, "onCreate");
         super.onCreate();
     }
 
@@ -28,7 +29,7 @@ public class BackgroundService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "onDestroy");
+        LogHelper.i(TAG, "onDestroy");
         super.onDestroy();
     }
 }

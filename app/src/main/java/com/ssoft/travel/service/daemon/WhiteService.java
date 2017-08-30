@@ -6,10 +6,10 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.v7.app.NotificationCompat;
-import android.util.Log;
 
 import com.ssoft.travel.R;
 import com.ssoft.travel.ui.MainActivity;
+import com.ssoft.travel.utils.LogHelper;
 
 
 /**
@@ -25,13 +25,13 @@ public class WhiteService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "WhiteService->onCreate");
+        LogHelper.i(TAG, "WhiteService->onCreate");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "WhiteService->onStartCommand");
+        LogHelper.i(TAG, "WhiteService->onStartCommand");
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setSmallIcon(R.mipmap.ic_launcher);
@@ -55,7 +55,7 @@ public class WhiteService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "WhiteService->onDestroy");
+        LogHelper.i(TAG, "WhiteService->onDestroy");
         super.onDestroy();
     }
 }

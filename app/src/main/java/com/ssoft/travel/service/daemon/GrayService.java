@@ -8,7 +8,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.IBinder;
-import android.util.Log;
+
+import com.ssoft.travel.utils.LogHelper;
 
 /**
  * 灰色保活手法创建的Service进程
@@ -27,13 +28,13 @@ public class GrayService extends Service {
 
     @Override
     public void onCreate() {
-        Log.i(TAG, "GrayService->onCreate");
+        LogHelper.i(TAG, "GrayService->onCreate");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(TAG, "GrayService->onStartCommand");
+        LogHelper.i(TAG, "GrayService->onStartCommand");
         if (Build.VERSION.SDK_INT < 18) {
             startForeground(GRAY_SERVICE_ID, new Notification());//API < 18 ，此方法能有效隐藏Notification上的图标
         } else {
@@ -59,7 +60,7 @@ public class GrayService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.i(TAG, "GrayService->onDestroy");
+        LogHelper.i(TAG, "GrayService->onDestroy");
         super.onDestroy();
     }
 
@@ -70,13 +71,13 @@ public class GrayService extends Service {
 
         @Override
         public void onCreate() {
-            Log.i(TAG, "InnerService -> onCreate");
+            LogHelper.i(TAG, "InnerService -> onCreate");
             super.onCreate();
         }
 
         @Override
         public int onStartCommand(Intent intent, int flags, int startId) {
-            Log.i(TAG, "InnerService -> onStartCommand");
+            LogHelper.i(TAG, "InnerService -> onStartCommand");
             startForeground(GRAY_SERVICE_ID, new Notification());
             //stopForeground(true);
             stopSelf();
@@ -91,7 +92,7 @@ public class GrayService extends Service {
 
         @Override
         public void onDestroy() {
-            Log.i(TAG, "InnerService -> onDestroy");
+            LogHelper.i(TAG, "InnerService -> onDestroy");
             super.onDestroy();
         }
     }
